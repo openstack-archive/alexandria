@@ -1,0 +1,8 @@
+
+
+[
+{name:itop,type:cmdb},
+{name:redfifh,type:hw},
+{name:ironic,type:hw}
+]
+
