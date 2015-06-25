@@ -14,3 +14,6 @@ class AlexandriaConfiguration(object):
     
     def get_driver_info(self,driver):
         return self.config.options(driver)
+    
+    def get_alexandria_port(self):
+        return self.config.get("alexandria", "port")
