@@ -6,7 +6,7 @@ from flask import request
 import config
 
 # Vars
-alexandria_version="0.1"
+alexandria_version = "0.1"
     
 # Configuration file
 conf_file = config.AlexandriaConfiguration("alexandria.conf")
@@ -34,6 +34,13 @@ def api_driver(driver_name):
 def shutdown():
     shutdown_server()
     return 'Server shutting down...'
+
+@app.route('/bruno', methods=['POST'])
+def bruno():
+    coucou = "Coucou " + request.json["Server"]
+    #coucou = "Coucou"
+    return coucou
+
 
 @app.route("/", methods = ["GET"])
 def api_root():
