@@ -10,6 +10,12 @@ class AlexandriaConfiguration(object):
         self.config.read(configuration_file)
         
     def get_drivers(self):
+        drivers = self.config.sections()
+        drivers.remove("alexandria")
+        return drivers
+        
+                
+        
         return self.config.sections()
     
     def get_driver_info(self,driver):
@@ -17,3 +23,4 @@ class AlexandriaConfiguration(object):
     
     def get_alexandria_port(self):
         return self.config.get("alexandria", "port")
+        

@@ -4,12 +4,8 @@ from flask import Flask
 from flask import jsonify
 from flask import request
 import config
-
-# Vars
-alexandria_version = "0.1"
-    
-# Configuration file
-conf_file = config.AlexandriaConfiguration("alexandria.conf")
+import models
+import pprint
 
 # Initialise Flask
 app = Flask(__name__)    
@@ -41,6 +37,9 @@ def bruno():
     #coucou = "Coucou"
     return coucou
 
+@app.route('/ci', methods=['POST'])
+def create_ci():
+    pass
 
 @app.route("/", methods = ["GET"])
 def api_root():
@@ -65,4 +64,19 @@ def shutdown_server():
 
 
 if __name__ == "__main__":
+    # Vars  
+    alexandria_version = "0.1"
+    
+    # Define a PrettyPrinter for debugging.
+    pp = pprint.PrettyPrinter(indent=4)
+    
+    # Configuration file
+    conf_file = config.AlexandriaConfiguration("alexandria.conf")
+
+    # Model
+    models = models.Model()
+    
+    print models.reference_items
+    pp.pprint(models.EthernetInterface)  # debugging example.
+    pp.pprint(models.Manager)  # debugging example.
     app.run(port=int(conf_file.get_alexandria_port()))
