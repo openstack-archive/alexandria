@@ -8,12 +8,19 @@ import models
 import pprint
 
 # Initialise Flask
-app = Flask(__name__)    
+app = Flask(__name__)
 app.debug = False
 
 
 @app.route("/drivers", methods = ["GET"])
 def api_drivers():
+    """Return drivers.
+
+    :param nome
+    :type na
+    :returns:  http response
+
+    """
     data = {"drivers" : conf_file.get_drivers()}
     resp = jsonify(data)
     resp.status_code = 200

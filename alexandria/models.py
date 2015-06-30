@@ -6,6 +6,7 @@ import os
 import re
 
 class Model(object):
+    """Implements Alexandria reference model."""
     def __init__(self):
         
         self.reference_items = []
