@@ -2,18 +2,16 @@
 
 class Driver(object):
     
-    def __init__(self, alexandria_configuration):
-        # Get credentials from conf files
-        
-        
-        
+    def __init__(self):
+        # Get credentials from conf files for CMDB       
         pass
 
 class itop(Driver):
     
-    def get_ci(self,uuid):
+    def get(self):
         pass
     
-    def push_ci(self,uuid):
+    def push(self):
+        pass
         
     
