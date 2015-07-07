@@ -6,12 +6,29 @@ class Driver(object):
         # Get credentials from conf files for CMDB       
         pass
 
-class itop(Driver):
+class Itop(Driver):
     
     def get(self):
-        pass
+        print "Get from itop"
+        return True
+
     
     def push(self):
         pass
-        
-    
+
+class Redfish(Driver):
+    pass
+
+class Ironic(Driver):
+    pass
+
+class Mondorescue(Driver):
+    pass
+
+class Fakecmdb(Driver):
+    pass
+
+class Fakeprovider(Driver):
+    pass
+
+

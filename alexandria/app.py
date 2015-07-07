@@ -3,11 +3,13 @@
 from flask import Flask
 from flask import jsonify
 from flask import request
+import sys
 import config
 import models
 import pprint
 import configuration_item
-from alexandria.drivers import Driver
+import drivers
+#from django.core.files.temp import gettempdir
 
 # Initialise Flask
 app = Flask(__name__)
@@ -57,7 +59,7 @@ def create_ci():
     # Error cas uuid already available
     alexandria_cis.update({request.json["uuid"]: ci })
     
-    driver_list = conf_file.get_drivers()
+    #driver_list = conf_file.get_drivers()
     
     #for driver in driver_list:
         #driver.get(ci)
@@ -80,7 +82,7 @@ def api_root():
     resp = jsonify(data)
     resp.status_code = 200
 
-    resp.headers["AuthorSite"] = "http://uggla.fr"
+    resp.headers["AuthorSite"] = "https://github.com/uggla/alexandria"
 
     return resp
 
@@ -94,15 +96,31 @@ def shutdown_server():
 class Alexandria(object):
     def __init__(self):
         self.version = "0.1"
+        
+        # Model
         self.model = models.Model()
         
-        driver_name_list = conf_file.get_drivers()
+        # Configuration file
+        self.conf_file = config.AlexandriaConfiguration("alexandria.conf")
+
+        # Build driver list from configuration file
+        driver_name_list = self.conf_file.get_drivers()
         
         self.drivers = []
-        
+
         # Create objects !!!! TO BE CONTINUED !!!!
         for driver_name in driver_name_list:
-            setattr(self, driver_name, Driver)
+            # Get class
+            driver_class = getattr(sys.modules["drivers"], driver_name.capitalize())
+            # Create object
+            driver_object = driver_class()
+            # Add to driver list
+            self.drivers.append(driver_object) 
+            index = self.drivers.index(driver_object)
+            # Set an attribute to the coresponding driver
+            setattr(self, driver_name.lower(), self.drivers[index])
+            
+        
         
 
 
@@ -112,20 +130,16 @@ if __name__ == "__main__":
     
     alexandria = Alexandria()
     
-    
     # Define a PrettyPrinter for debugging.
     pp = pprint.PrettyPrinter(indent=4)
-    
-    # Configuration file
-    conf_file = config.AlexandriaConfiguration("alexandria.conf")
-
-    # Model
-    models = models.Model()
-
+      
     # Define a structure to handle ci
     alexandria_cis = {}
     
-    print models.reference_items
+    print alexandria.model.reference_items
+    alexandria.itop.get()
     #pp.pprint(models.EthernetInterface)  # debugging example.
     #pp.pprint(models.Manager)  # debugging example.
-    app.run(port=int(conf_file.get_alexandria_port()))
+    app.run(port=int(alexandria.conf_file.get_alexandria_port()))
+    
+    
