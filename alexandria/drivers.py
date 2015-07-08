@@ -1,9 +1,11 @@
 # coding=utf-8
 
+import types
+
 class Driver(object):
     
     def __init__(self):
-        self.driver_type=__name__
+        self.driver_type = self.__class__.__name__
         # Get credentials from conf files for CMDB       
         pass
 

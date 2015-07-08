@@ -10,4 +10,8 @@ class ConfigurationItem(object):
         self.ip_mgmt = ip_mgmt
         self.login = login
         self.password = password
-
+        
+        self.ci_type = None
+        self.__data = None
+        
+        
