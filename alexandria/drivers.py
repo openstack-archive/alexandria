@@ -9,6 +9,9 @@ class Driver(object):
         # Get credentials from conf files for CMDB       
         pass
     
+    def get_driver_type(self):
+            return self.driver_type
+    
     def get_ci(self):
         pass
     
