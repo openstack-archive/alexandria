@@ -17,7 +17,7 @@ class Model(object):
     
     def read_ref_files(self):
         cwd = os.getcwd()
-        model_files = glob.glob(cwd + "/model/*.json")     # change hierarchy model/std/*.json 
+        model_files = glob.glob(cwd + "/model/redfish/*.json")     # hierarchy model/std/*.json 
         
         for file in model_files:
             # Derive attribute name from file.
