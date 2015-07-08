@@ -4,12 +4,12 @@ from flask import Flask
 from flask import jsonify
 from flask import request
 import sys
+import pprint
 import config
 import models
-import pprint
 import configuration_item
 import drivers
-#from django.core.files.temp import gettempdir
+
 
 # Initialise Flask
 app = Flask(__name__)
@@ -106,7 +106,7 @@ class Alexandria(object):
         # Build driver list from configuration file
         driver_name_list = self.conf_file.get_drivers()
         
-        self.drivers = []
+        self.drivers = drivers.DriverCollection()    
 
         # Create objects !!!! TO BE CONTINUED !!!!
         for driver_name in driver_name_list:
@@ -118,10 +118,7 @@ class Alexandria(object):
             self.drivers.append(driver_object) 
             index = self.drivers.index(driver_object)
             # Set an attribute to the coresponding driver
-            setattr(self, driver_name.lower(), self.drivers[index])
-            
-        
-        
+            setattr(self.drivers, driver_name.lower(), self.drivers[index])                      
 
 
 if __name__ == "__main__":
@@ -136,8 +133,12 @@ if __name__ == "__main__":
     # Define a structure to handle ci
     alexandria_cis = {}
     
+    
+    # Debugging stuff to remove later.
     print alexandria.model.reference_items
-    alexandria.itop.get()
+    print alexandria.drivers.itop.get()
+    print alexandria.drivers.redfish.get()
+    print alexandria.drivers.itop.driver_type
     #pp.pprint(models.EthernetInterface)  # debugging example.
     #pp.pprint(models.Manager)  # debugging example.
     app.run(port=int(alexandria.conf_file.get_alexandria_port()))
