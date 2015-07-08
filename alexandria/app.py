@@ -66,10 +66,13 @@ def create_ci():
     
     alexandria_cis.update({request.json["uuid"]: ci })
     
-    #driver_list = conf_file.get_drivers()
+    # Now do a "broadcast" get to all our drivers 
+    for driver in alexandria.drivers:
+        app.logger.info("Get information from %s driver." % driver.get_driver_type())
+        driver.get_ci()
     
-    #for driver in driver_list:
-        #driver.get(ci)
+    
+    # TODO : Remove next line, used just for debugging...
     pp.pprint(alexandria_cis)
     
     app.logger.debug("Debug message")
@@ -161,10 +164,10 @@ if __name__ == "__main__":
     configure_logger(app.logger, app_logfile)
     
     
-    # Debugging stuff to remove later.
+    # TODO : Debugging stuff to remove later.
     print alexandria.model.reference_items
-    print alexandria.drivers.itop.get()
-    print alexandria.drivers.redfish.get()
+    print alexandria.drivers.itop.get_ci()
+    print alexandria.drivers.redfish.get_ci()
     print alexandria.drivers.itop.driver_type
     #pp.pprint(models.EthernetInterface)  # debugging example.
     #pp.pprint(models.Manager)  # debugging example.
