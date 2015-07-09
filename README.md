@@ -8,3 +8,7 @@ Mailing lists :
 alexandria-devel@mondorescue.org
 
 alexandria-announce@mondorescue.org
+
+Etherpad :
+
+https://etherpad.openstack.org/p/Alexandria
