@@ -1,6 +1,38 @@
 # coding=utf-8
 
+import sys
 import ConfigParser
+import models
+import drivers
+
+
+class Alexandria(object):
+    def __init__(self):
+        self.name = "Alexandria"
+        self.version = "0.1"
+        
+        # Model
+        self.model = models.Model()
+        
+        # Configuration file
+        self.conf_file = AlexandriaConfiguration("alexandria.conf")
+
+        # Build driver list from configuration file
+        driver_name_list = self.conf_file.get_drivers()
+        
+        self.drivers = drivers.DriverCollection()    
+
+        # Create objects !!!! TO BE CONTINUED !!!!
+        for driver_name in driver_name_list:
+            # Get class
+            driver_class = getattr(sys.modules["drivers"], driver_name.capitalize())
+            # Create object
+            driver_object = driver_class()
+            # Add to driver list
+            self.drivers.append(driver_object) 
+            index = self.drivers.index(driver_object)
+            # Set an attribute to the coresponding driver
+            setattr(self.drivers, driver_name.lower(), self.drivers[index])                      
 
 
 class AlexandriaConfiguration(object):
@@ -14,12 +46,14 @@ class AlexandriaConfiguration(object):
         drivers.remove("alexandria")
         return drivers
 
-
-
-        return self.config.sections()
-
     def get_driver_info(self,driver):
         return self.config.options(driver)
 
     def get_alexandria_port(self):
         return self.config.get("alexandria", "port")
+
+
+# Initialise global variable
+# Define alexandria global object so it can be called from anywhere.
+alexandria = Alexandria()
+

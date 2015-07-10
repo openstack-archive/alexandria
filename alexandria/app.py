@@ -1,16 +1,13 @@
 # coding=utf-8
 
-from flask import Flask
-from flask import jsonify
-from flask import request
-import sys
 import pprint
 import logging
 from logging.handlers import RotatingFileHandler
+from flask import Flask
+from flask import jsonify
+from flask import request
 import config
-import models
 import configuration_item
-import drivers
 
 
 # Initialise Flask
@@ -27,14 +24,14 @@ def api_drivers():
     :returns:  http response
 
     """
-    data = {"drivers" : conf_file.get_drivers()}
+    data = {"drivers" : config.alexandria.conf_file.get_drivers()}
     resp = jsonify(data)
     resp.status_code = 200
     return resp
 
 @app.route("/drivers/<driver_name>")
 def api_driver(driver_name):
-    data = {driver_name : conf_file.get_driver_info(driver_name)}
+    data = {driver_name : config.alexandria.conf_file.get_driver_info(driver_name)}
     resp = jsonify(data)
     resp.status_code = 200
     return resp
@@ -67,9 +64,9 @@ def create_ci():
     alexandria_cis.update({request.json["uuid"]: ci })
     
     # Now do a "broadcast" get to all our drivers 
-    for driver in alexandria.drivers:
+    for driver in config.alexandria.drivers:
         app.logger.info("Get information from %s driver." % driver.get_driver_type())
-        driver.get_ci()
+        driver.get_ci(ci)
     
     
     # TODO : Remove next line, used just for debugging...
@@ -85,11 +82,9 @@ def update_ci():
 
 @app.route("/", methods = ["GET"])
 def api_root():
-    
-    #global alexandria
     data = {
-        "Service"  : "Alexandria",
-        "Version" : alexandria.version
+        "Service"  : config.alexandria.name,
+        "Version" : config.alexandria.version
     }
 
     resp = jsonify(data)
@@ -118,41 +113,9 @@ def configure_logger(logger,logfile):
     logger.addHandler(file_handler)
 
 
-class Alexandria(object):
-    def __init__(self):
-        self.version = "0.1"
-        
-        # Model
-        self.model = models.Model()
-        
-        # Configuration file
-        self.conf_file = config.AlexandriaConfiguration("alexandria.conf")
-
-        # Build driver list from configuration file
-        driver_name_list = self.conf_file.get_drivers()
-        
-        self.drivers = drivers.DriverCollection()    
-
-        # Create objects !!!! TO BE CONTINUED !!!!
-        for driver_name in driver_name_list:
-            # Get class
-            driver_class = getattr(sys.modules["drivers"], driver_name.capitalize())
-            # Create object
-            driver_object = driver_class()
-            # Add to driver list
-            self.drivers.append(driver_object) 
-            index = self.drivers.index(driver_object)
-            # Set an attribute to the coresponding driver
-            setattr(self.drivers, driver_name.lower(), self.drivers[index])                      
-
-
 if __name__ == "__main__":
     # Vars
     app_logfile = "/var/log/alexandria/alexandria.log"
-      
-    global alexandria
-
-    alexandria = Alexandria()
     
     # Define a PrettyPrinter for debugging.
     pp = pprint.PrettyPrinter(indent=4)
@@ -165,14 +128,14 @@ if __name__ == "__main__":
     
     
     # TODO : Debugging stuff to remove later.
-    print alexandria.model.reference_items
-    print alexandria.drivers.itop.get_ci()
-    print alexandria.drivers.redfish.get_ci()
-    print alexandria.drivers.itop.driver_type
+    print config.alexandria.model.reference_items
+    print config.alexandria.drivers.itop.get_ci(None)
+    print config.alexandria.drivers.redfish.get_ci(None)
+    print config.alexandria.drivers.itop.driver_type
     #pp.pprint(models.EthernetInterface)  # debugging example.
     #pp.pprint(models.Manager)  # debugging example.
     app.logger.info("Starting Alexandria...")
-    app.run(port=int(alexandria.conf_file.get_alexandria_port()))
+    app.run(port=int(config.alexandria.conf_file.get_alexandria_port()))
     
     
     

@@ -1,6 +1,8 @@
 # coding=utf-8
 
 import types
+import config
+
 
 class Driver(object):
 
