@@ -8,7 +8,7 @@
     "properties": {
         "error": {
             "$ref": "#ExtendedInfo"
-        },
+        }
     },
     "required": [
         "error"
@@ -133,9 +133,9 @@
                 },
                 "required": [
                     "code"
-                ],
-            },
-        },
+                ]
+            }
+        }
     },
     "copyright": "Copyright 2013-2014 Avocent Corporation. Copyright 2014 Dell Inc. Copyright 2013-2014 Hewlett-Packard Development Company, L.P. Copyright 2014 Intel Corporation."
 }
