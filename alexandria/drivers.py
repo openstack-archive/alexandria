@@ -3,6 +3,7 @@
 import types
 import pprint
 import config
+import json
 
 
 class Driver(object):
@@ -28,7 +29,7 @@ class Itop(Driver):
         print "Get from itop"
         return True
 
-    def push_ci(self):
+    def push_ci(self,ci):
         pass
 
 class Redfish(Driver):
@@ -37,35 +38,56 @@ class Redfish(Driver):
         print "Get from redfish"
         return True
 
+
 class Ironic(Driver):
     pass
+
 
 class Mondorescue(Driver):
     pass
 
+
 class Fakecmdb(Driver):
-    pass
+    def push_ci(self, ci):    
+        # Determine ci type so we can do the proper action.
+        pp = pprint.PrettyPrinter(indent=4)       
+        if ci.ci_type == "Manager":
+            print "We are in Fakecmdb driver !"
+            pp.pprint(ci.data)
+            # Simply write a json file with ci.data content.
+            with open("Fakecmdb.json", "w") as jsonfile:
+                json.dump(ci.data, jsonfile, indent=4)
+            jsonfile.close()
+
+        #     
+        #=======================================================================
 
 class Fakeprovider(Driver):
     
     def get_ci(self,ci):
-        import app
         # Simulate a driver that will provide Manager data.
         
-        # TODO a connect method must be implemented as 
+        # TODO a connect method must be implemented
         
         # Assuming the connection is ok.
         
-        # Now create a manager model from reference model.
+        # Now create a copy of manager model from reference model.
         ci.ci_type = "Manager"
-        ci.data = config.alexandria.model.Manager.copy()
+        ci.data = config.alexandria.model.get_model("Manager")
         
-        if ci.data is config.alexandria.model.Manager:
-            print "identical"
+        # Update the structure with data
+        ci.data["ManagerType"] = "BMC"
+        ci.data["Model"] = "Néné Manager"
+        ci.data["FirmwareVersion"] = "1.00"
+        
+
+        #if ci.data is config.alexandria.model.Manager:
+        #    print "identical"
 
         pp = pprint.PrettyPrinter(indent=4)
         
-        pp.pprint(ci.data)
+        pp.pprint(ci.ci_type)
+
 
 class DriverCollection(list):
     pass

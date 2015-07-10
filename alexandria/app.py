@@ -63,18 +63,35 @@ def create_ci():
     
     alexandria_cis.update({request.json["uuid"]: ci })
     
-    # Now do a "broadcast" get to all our drivers 
-    for driver in config.alexandria.drivers:
-        app.logger.info("Get information from {} driver.".format(driver.get_driver_type()))
-        driver.get_ci(ci)
+    # Synchronize data beetween all our drivers
+    synchronize_ci(ci)
     
+    app.logger.debug("citype {}".format(ci.ci_type))
     
     # TODO : Remove next line, used just for debugging...
     pp.pprint(alexandria_cis)
     
     app.logger.debug("Debug message")
     
-    return ("ok")
+    # Craft response
+    resp = jsonify(ci.data)
+    resp.status_code = 200
+    
+    resp.headers["AuthorSite"] = "https://github.com/uggla/alexandria"
+
+    return resp
+    
+def synchronize_ci(ci):
+    # Now do a "broadcast" get to all our drivers 
+    for driver in config.alexandria.drivers:
+        app.logger.info("Get information from {} driver.".format(driver.get_driver_type()))
+        driver.get_ci(ci)
+        
+    # Push the data provided above to all our drivers
+    for driver in config.alexandria.drivers:
+        app.logger.info("Push information to {} driver.".format(driver.get_driver_type()))
+        driver.push_ci(ci)
+    
 
 @app.route('/ci', methods=['PUT'])
 def update_ci():
