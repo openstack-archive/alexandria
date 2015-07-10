@@ -1,0 +1,141 @@
+{
+    "$schema": "http://schemas.dmtf.org/redfish/v1/redfish-schema.0.96.0",
+    "title": "ExtendedError.0.96.0",
+    "type": "object",
+    "additionalProperties": false,
+    "description": "This is the schema definition for the Extended Error.  Extended errors can be returned in the body of operation responses.  They augment the HTTP error codes with more meaningful information about why the error occurred.",
+    "longDescription": "This resource shall be used to represent extended errors for a Redfish implementation.",
+    "properties": {
+        "error": {
+            "$ref": "#ExtendedInfo"
+        },
+    },
+    "required": [
+        "error"
+    ],
+    "definitions": {
+        "ExtendedInfo": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "This is the schema definition for the Extended Information.  Extended information can be returned in the body of an error response or as an annotation in a successful response.",
+            "longDescription": "This resource shall be used to represent extended errors for a Redfish implementation.",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "This is the key for this message which can be used to look up the message in a message registry.",
+                    "pattern": "^[A-Za-z0-9]+\\.\\d+\\.\\d+.[A-Za-z0-9.]+$",
+                    "readonly": true,
+                    "longDescription": "This property shall be a key into message registry as described in the Redfish specification."
+                },
+                "message": {
+                    "type": "string",
+                    "description": "This is the human readable message, if provided.",
+                    "readonly": true,
+                    "longDescription": "This property shall contain an optional human readable message."
+                },
+                "target": {
+                    "type": "string",
+                    "description": "The target of the message.",
+                    "readonly": true,
+                    "longDescription": "This property shall contain the target of the message."
+                },
+                "@message.parameters": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "readonly": true,
+                    "description": "This array of message arguments are substituted for the arguments in the message when looked up in the message registry.",
+                    "longDescription": "This property shall contain the message substitution arguments for the specific message referenced by the MessageID and shall only be included if the MessageID is present."
+                },
+                "@message.severity": {
+                    "type": "string",
+                    "enum": [
+                        "OK",
+                        "Warning",
+                        "Critical"
+                    ],
+                    "enumDescriptions": {
+                        "OK": "Normal",
+                        "Warning": "A condition exists that requires attention",
+                        "Critical": "A critical condition exists that requires immediate attention"
+                    },
+                    "description": "This is the severity of the errors.",
+                    "readonly": true,
+                    "longDescription": "The value of this property shall be the severity of the error, as defined in the Status section of the Redfish specificaiton."
+                },
+                "@message.resolution": {
+                    "type": "string",
+                    "description": "Used to provide suggestions on how to resolve the situation that caused the error.",
+                    "readonly": true,
+                    "longDescription": "This property shall contain an override of the Resolution of the message in message registry, if present."
+                },
+                "details": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "description": "Information about a specific message.",
+                        "longDescription": "This shall be used to represent detailed instances of extended information for a Redfish implementation.",
+                        "properties": {
+                            "code": {
+                                "type": "string",
+                                "description": "This is the key for this message which can be used to look up the message in a message registry.",
+                                "pattern": "^[A-Za-z0-9]+\\.\\d+\\.\\d+.[A-Za-z0-9.]+$",
+                                "readonly": true,
+                                "longDescription": "This property shall be a key into message registry as described in the Redfish specification."
+                            },
+                            "message": {
+                                "type": "string",
+                                "description": "This is the human readable message, if provided.",
+                                "readonly": true,
+                                "longDescription": "This property shall contain an optional human readable message."
+                            },
+                            "target": {
+                                "type": "string"
+                            },
+                            "@message.parameters": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "readonly": true,
+                                "description": "This array of message arguments are substituted for the arguments in the message when looked up in the message registry.",
+                                "longDescription": "This property shall contain the message substitution arguments for the specific message referenced by the MessageID and shall only be included if the MessageID is present."
+                            },
+                            "@message.severity": {
+                                "type": "string",
+                                "enum": [
+                                    "OK",
+                                    "Warning",
+                                    "Critical"
+                                ],
+                                "enumDescriptions": {
+                                    "OK": "Normal",
+                                    "Warning": "A condition exists that requires attention",
+                                    "Critical": "A critical condition exists that requires immediate attention"
+                                },
+                                "description": "This is the severity of the errors.",
+                                "readonly": true,
+                                "longDescription": "The value of this property shall be the severity of the error, as defined in the Status section of the Redfish specificaiton."
+                            },
+                            "@message.resolution": {
+                                "type": "string",
+                                "description": "Used to provide suggestions on how to resolve the situation that caused the error.",
+                                "readonly": true,
+                                "longDescription": "This property shall contain an override of the Resolution of the message in message registry, if present."
+                            }
+                        },
+                        "required": [
+                            "code"
+                        ]
+                    }
+                },
+                "required": [
+                    "code"
+                ],
+            },
+        },
+    },
+    "copyright": "Copyright 2013-2014 Avocent Corporation. Copyright 2014 Dell Inc. Copyright 2013-2014 Hewlett-Packard Development Company, L.P. Copyright 2014 Intel Corporation."
+}

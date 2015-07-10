@@ -1,0 +1,262 @@
+{
+    "$schema": "http://schemas.dmtf.org/redfish/v1/redfish-schema.0.96.0",
+    "title": "Resource.0.96.0",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "@odata.context": {
+            "$ref": "odata.4.0.0.json#context"
+        },
+        "@odata.id": {
+            "$ref": "odata.4.0.0.json#id"
+        },
+        "@odata.type": {
+            "$ref": "odata.4.0.0.json#type"
+        },
+        "Oem": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "additionalProperties": false,
+            "properties": {
+
+            },
+            "description": "This is the manufacturer/provider specific extension moniker used to divide the Oem object into sections.",
+            "longDescription": "The value of this string shall be of the format for the reserved word *Oem*."
+        },
+        "Id": {
+            "type": "string",
+            "readonly": true,
+            "description": "Uniquely identifies the resource within the collection of like resources.",
+            "longDescription": "This property represents an identifier for the resource.  All values for resources described by this schema shall comply to the requirements as described in the Redfish specification."
+        },
+        "Description": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "readonly": true,
+            "description": "Provides a description of this resource and is used for commonality  in the schema definitions.",
+            "longDescription": "This object represents the Description property.  All values for resources described by this schema shall comply to the requirements as described in the Redfish specification."
+        },
+        "Name": {
+            "type": "string",
+            "readonly": true,
+            "description": "The name of the resource or array element.",
+            "longDescription": "This object represents the Name property.  All values for resources described by this schema shall comply to the requirements as described in the Redfish specification. The value of this string shall be of the format for the reserved word *Name*."
+        },
+        "ResetType": {
+            "type": "string",
+            "enum": [
+                "On",
+                "ForceOff",
+                "GracefulRestart",
+                "ForceRestart",
+                "Nmi",
+                "ForceOn",
+                "PushPowerButton"
+            ],
+            "enumDescriptions": {
+                "On": "Turn the system on",
+                "ForceOff": "Turn the system off immediately (non-graceful) shutdown",
+                "GracefulRestart": "Perform a graceful system shutdown followed by a restart of the system",
+                "ForceRestart": "Perform an immediate (non-graceful) shutdown, followed by a restart of the system",
+                "Nmi": "Generate a Non-Maskable Interrupt to cause an immediate system halt",
+                "ForceOn": "Turn the system on immediately",
+                "PushPowerButton": "Simulate the pressing of the physical power button on this system"
+            }
+        },
+        "Links": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Oem": {
+                    "type": [
+                        "object",
+                        "null"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+
+                    },
+                    "description": "Oem extension object.",
+                    "longDescription": "This object represents the Oem property.  All values for resources described by this schema shall comply to the requirements as described in the Redfish specification."
+                }
+            }
+        },
+        "SettingsResult": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Operation": {
+                    "type": "string",
+                    "enum": [
+                        "SettingsApply"
+                    ],
+                    "readonly": true,
+                    "description": "Last operation detail.",
+                    "longDescription": "The value of this property shall indicate the results of the settings application.  The value SettingsApply shall be used to indicate the Settings were applied during the normal course of operations, such as what happens during a reboot."
+                },
+                "Time": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "readonly": true,
+                    "description": "Indicates the time the settings were applied.",
+                    "longDescription": "The value of this property shall indicate the time that the settings object was applied to the resource."
+                },
+                "ETag": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "readonly": true,
+                    "description": "The ETag of the resource to which the settings were applied, after the application.",
+                    "longDescription": "The value of this property shall be the ETag of the resource to which the settings were applied, after the application.  This is here so that the client can check it against the ETag of the current resource to see if any other changes have also happened to the resource."
+                }
+            }
+        },
+        "PhysicalContext": {
+            "type": "string",
+            "enum": [
+                "Room",
+                "Intake",
+                "Exhaust",
+                "Front",
+                "Back",
+                "Upper",
+                "Lower",
+                "CPU",
+                "GPU",
+                "Backplane",
+                "SystemBoard",
+                "PowerSupply",
+                "VoltageRegulator",
+                "StorageDevice",
+                "NetworkingDevice",
+                "ComputeBay",
+                "StorageBay",
+                "NetworkBay",
+                "ExpansionBay",
+                "PowerSupplyBay"
+            ],
+            "enumDescriptions": {
+                "Room": "The room",
+                "Intake": "The intake point of the chassis",
+                "Exhaust": "The exhaust point of the chassis",
+                "Front": "The front of the chassis",
+                "Back": "The back of the chassis",
+                "Upper": "The upper portion of the chassis",
+                "Lower": "The lower portion of the chassis",
+                "CPU": "A Processor (CPU)",
+                "GPU": "A Graphics Processor (GPU)",
+                "Backplane": "A backplane within the chassis",
+                "SystemBoard": "The system board (PCB)",
+                "PowerSupply": "A power supply",
+                "VoltageRegulator": "A voltage regulator device",
+                "StorageDevice": "A storage device",
+                "NetworkingDevice": "A networking device",
+                "ComputeBay": "Within a compute bay",
+                "StorageBay": "Within a storage bay",
+                "NetworkBay": "Within a networking bay",
+                "ExpansionBay": "Within an expansion bay",
+                "PowerSupplyBay": "Within a power supply bay"
+            }
+        },
+        "Status": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "State": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "enum": [
+                        "Enabled",
+                        "Disabled",
+                        "Offline",
+                        "InTest",
+                        "Starting",
+                        "Absent"
+                    ],
+                    "enumDescriptions": {
+                        "Enabled": "This function or resource has been enabled",
+                        "Disabled": "This function or resource has been disabled",
+                        "Offline": "This function or resource is enabled, but currently unavailable",
+                        "InTest": "This function or resource is underdoing testing",
+                        "Starting": "This function or resource is starting",
+                        "Absent": "This function or resource is not installed"
+                    },
+                    "readonly": true,
+                    "description": "This indicates the known state of the resource, such as if it is enabled.",
+                    "longDescription": "This property shall represent if this component is available or not and why.  Enabled indicates the resource is available.  Disabled indicates the resource has been intentionally made unavailable but it can be enabled.  Offline indicates the resource is unavailable intentionally and requires action to be made available.  InTest indicates that the component is undergoing testing.  Starting indicates that the resource is on its way to becoming available.  Absent indicates the resources is physically unavailable."
+                },
+                "HealthRollup": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "enum": [
+                        "OK",
+                        "Warning",
+                        "Critical"
+                    ],
+                    "enumDescriptions": {
+                        "OK": "Normal",
+                        "Warning": "A condition exists that requires attention",
+                        "Critical": "A critical condition exists that requires immediate attention"
+                    },
+                    "readonly": true,
+                    "description": "This represents the overall health state from the view of this resource.",
+                    "longDescription": "This property shall represent the HealthState of the resource and its dependent resources.  The values shall conform to those defined in the Redfish specification."
+                },
+                "Health": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "enum": [
+                        "OK",
+                        "Warning",
+                        "Critical"
+                    ],
+                    "enumDescriptions": {
+                        "OK": "Normal",
+                        "Warning": "A condition exists that requires attention",
+                        "Critical": "A critical condition exists that requires immediate attention"
+                    },
+                    "readonly": true,
+                    "description": "This represents the health state of this resource in the absence of its dependent resources.",
+                    "longDescription": "This property shall represent the HealthState of the resource without considering its dependent resources. The values shall conform to those defined in the Redfish specification."
+                },
+                "Oem": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+
+                    },
+                    "description": "Oem extension object.",
+                    "longDescription": "This object represents the Oem property.  All values for resources described by this schema shall comply to the requirements as described in the Redfish specification."
+                }
+            }
+        },
+        "Settings": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "href": {
+                    "type": "string",
+                    "readonly": true,
+                    "description": "Reference to the resource the client may PUT/PATCH to in order to change this resource.",
+                    "longDescription": "The value of this property shall be the URI of the resource to which a client must do a PUT or PATCh in order to modify this resource."
+                }
+            }
+        }
+    },
+    "required": [
+        "Name"
+    ]
+}

@@ -20,6 +20,7 @@ class Model(object):
         # Hierarchy model/std/*.json
         model_files = glob.glob(cwd + "/model/redfish/*.json")
         for file in model_files:
+            print("Loading model file : {}".format(file))
             # Derive attribute name from file.
             attr_name = os.path.basename(file)
             attr_name = re.sub(r"\..*$", "", attr_name)
