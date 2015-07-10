@@ -1,6 +1,7 @@
 # coding=utf-8
 
 import types
+import pprint
 import config
 
 
@@ -57,8 +58,14 @@ class Fakeprovider(Driver):
         
         # Now create a manager model from reference model.
         ci.ci_type = "Manager"
-        ci.data = config.alexandria.model.Manager
+        ci.data = config.alexandria.model.Manager.copy()
+        
+        if ci.data is config.alexandria.model.Manager:
+            print "identical"
 
+        pp = pprint.PrettyPrinter(indent=4)
+        
+        pp.pprint(ci.data)
 
 class DriverCollection(list):
     pass
