@@ -65,7 +65,7 @@ def create_ci():
     
     # Now do a "broadcast" get to all our drivers 
     for driver in config.alexandria.drivers:
-        app.logger.info("Get information from %s driver." % driver.get_driver_type())
+        app.logger.info("Get information from {} driver.".format(driver.get_driver_type()))
         driver.get_ci(ci)
     
     
