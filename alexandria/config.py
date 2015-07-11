@@ -5,11 +5,20 @@ import ConfigParser
 import models
 import drivers
 
+# Initialise global variable
+logger = None
+alexandria = None
+
+def initialise_alexandria():
+    """Define alexandria global object so it can be called from anywhere."""
+    global alexandria
+    # TODO : at a protection to not initialise twice.
+    alexandria = Alexandria()
 
 class Alexandria(object):
     def __init__(self):
-        self.name = "Alexandria"
-        self.version = "0.1"
+        self.NAME = "Alexandria"
+        self.VERSION = "0.1"
         
         # Model
         self.model = models.Model()
@@ -51,9 +60,3 @@ class AlexandriaConfiguration(object):
 
     def get_alexandria_port(self):
         return self.config.get("alexandria", "port")
-
-
-# Initialise global variable
-# Define alexandria global object so it can be called from anywhere.
-alexandria = Alexandria()
-

@@ -4,23 +4,26 @@ import json
 import glob
 import os
 import re
-
+import config
 
 class Model(object):
     """Implements Alexandria reference model."""
     def __init__(self):
-
+        self.logger = ""
         self.reference_items = []
-
         self.read_ref_files()
-        pass
+        
 
     def read_ref_files(self):
         cwd = os.getcwd()
         # Hierarchy model/std/*.json
+        # TODO : Manage several version of redfish.
+        #        Load the latest model in memory by default.
+        #        Update get_model with a version parameter
+        #        so if an older version is required load it.
         model_files = glob.glob(cwd + "/model/redfish/*.json")
         for file in model_files:
-            print("Loading model file : {}".format(file))
+            config.logger.debug("Loading model file : {}".format(file))
             # Derive attribute name from file.
             attr_name = os.path.basename(file)
             attr_name = re.sub(r"\..*$", "", attr_name)

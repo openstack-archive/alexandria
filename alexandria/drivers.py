@@ -76,10 +76,18 @@ class Fakeprovider(Driver):
         ci.data = config.alexandria.model.get_model("Manager")
         
         # Update the structure with data
+        # TODO : think to encapsulate to not edit ci.data directly.
+        #        This could be also a way to check source of truth.
+        #        If data provided by our driver is not the source of truth
+        #        then discard it.
+
+        
         ci.data["ManagerType"] = "BMC"
         ci.data["Model"] = "Néné Manager"
         ci.data["FirmwareVersion"] = "1.00"
         
+
+
 
         #if ci.data is config.alexandria.model.Manager:
         #    print "identical"

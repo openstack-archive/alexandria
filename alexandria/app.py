@@ -14,6 +14,9 @@ import configuration_item
 app = Flask(__name__)
 app.debug = True
 
+# Affect app logger to a global variable so logger can be used elsewhere.
+config.logger = app.logger
+
 
 @app.route("/drivers", methods = ["GET"])
 def api_drivers():
@@ -39,13 +42,12 @@ def api_driver(driver_name):
 @app.route('/shutdown', methods=['POST'])
 def shutdown():
     shutdown_server()
-    app.logger.info("Stopping Alexandria...")
+    app.logger.info("Stopping %s...", config.alexandria.NAME)
     return 'Server shutting down...'
 
 @app.route('/bruno', methods=['POST'])
 def bruno():
     coucou = "Coucou " + request.json["Server"]
-    #coucou = "Coucou"
     return coucou
 
 @app.route('/ci', methods=['POST'])
@@ -53,7 +55,7 @@ def create_ci():
     pp = pprint.PrettyPrinter(indent=4)
     
     ci = configuration_item.ConfigurationItem(request.json["uuid"],
-                              request.json["ip_mgmt"],
+                              request.json["url_mgmt"],
                               request.json["login"],
                               request.json["password"])
     
@@ -86,7 +88,9 @@ def synchronize_ci(ci):
     for driver in config.alexandria.drivers:
         app.logger.info("Get information from {} driver.".format(driver.get_driver_type()))
         driver.get_ci(ci)
-        
+    
+    # TODO : implement checksum to not push data if there is no change.
+    
     # Push the data provided above to all our drivers
     for driver in config.alexandria.drivers:
         app.logger.info("Push information to {} driver.".format(driver.get_driver_type()))
@@ -100,8 +104,8 @@ def update_ci():
 @app.route("/", methods = ["GET"])
 def api_root():
     data = {
-        "Service"  : config.alexandria.name,
-        "Version" : config.alexandria.version
+        "Service"  : config.alexandria.NAME,
+        "Version" : config.alexandria.VERSION
     }
 
     resp = jsonify(data)
@@ -138,11 +142,16 @@ if __name__ == "__main__":
     pp = pprint.PrettyPrinter(indent=4)
       
     # Define a structure to handle ci
-    alexandria_cis = {}
-    
+    # TODO : derivate a ci_collection class from dict.
+    #        (same mechanism as drivers)
+    alexandria_cis = {}                  
+
+    # Initialise, so create a global config.alexandria object.
+    config.initialise_alexandria()
+
     # Configure Flask logger
     configure_logger(app.logger, app_logfile)
-    
+    config.alexandria.model.logger = app.logger
     
     # TODO : Debugging stuff to remove later.
     print config.alexandria.model.reference_items
@@ -151,8 +160,6 @@ if __name__ == "__main__":
     print config.alexandria.drivers.itop.driver_type
     #pp.pprint(models.EthernetInterface)  # debugging example.
     #pp.pprint(models.Manager)  # debugging example.
-    app.logger.info("Starting Alexandria...")
+    app.logger.info("Starting %s...", config.alexandria.NAME)
     app.run(port=int(config.alexandria.conf_file.get_alexandria_port()))
-    
-    
     

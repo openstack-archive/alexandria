@@ -14,6 +14,9 @@ class ConfigurationItem(object):
         self.ci_parents = [] # List to store parents ci
         self.ci_children = [] # List to store children ci
         
+        # TODO : Maintain a structure to query only the drivers that make
+        #        sens for the CI.
+        
     @property
     def ci_type(self):
         return self.__ci_type
