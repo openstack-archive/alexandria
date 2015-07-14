@@ -12,3 +12,9 @@ alexandria-announce@mondorescue.org
 Etherpad :
 
 https://etherpad.openstack.org/p/Alexandria
+
+IRC :
+
+irc.freenode.org
+
+Channel : #alexandria-devel 
