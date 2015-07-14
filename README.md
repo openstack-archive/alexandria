@@ -1,20 +1,18 @@
 # Alexandria
 Alexandria (Refer to the Great Library of Alexandria) is an “inventory as a service” project that will be written in python. Alexandria will help datacenter team to maintain automatically a CMDB.
 
-# Contacts
+## Contacts
 
-Mailing lists :
+### Mailing lists :
 
 alexandria-devel@mondorescue.org
 
 alexandria-announce@mondorescue.org
 
-Etherpad :
+### Etherpad :
 
 https://etherpad.openstack.org/p/Alexandria
 
-IRC :
+### IRC :
 
-irc.freenode.org
-
-Channel : #alexandria-devel 
+Discussion of the project also takes place in #alexandria-devel on irc.freenode.net.
