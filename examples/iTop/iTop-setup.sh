@@ -25,11 +25,8 @@ mysqladmin -u root password password
 #Configure web part
 cd /var/www/html
 unzip -q -o /tmp/iTop-2.2.0-beta-2371.zip
-mkdir -p itop
 chmod 777 -R /var/www/html/
-cd itop
-ln -sf .. web
-cd ..
+ln -sf web itop
 ip a
 #sed -i -e 's/Listen 80/Listen 8000/' /etc/apache2/ports.conf
 start_apache

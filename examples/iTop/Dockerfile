@@ -2,9 +2,9 @@
 # Then use by browsing http://localhost:8000
 # iTop in Docker version 2.2.0 beta
 FROM ubuntu:15.04
-MAINTAINER vincent.misson@hp.com
+MAINTAINER vincent.misson@hpe.com
 ENV DEBIAN_FRONTEND noninterative
-# Install deps for Redfish mockup
+# Install deps for iTop
 RUN apt-get update
 RUN apt-get -y install apache2 unzip sed
 RUN apt-get -y install mysql-server
