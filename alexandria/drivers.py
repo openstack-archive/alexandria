@@ -5,7 +5,6 @@ import config
 import json
 import urllib
 import requests
-import types
 
 
 class Driver(object):
@@ -28,7 +27,7 @@ class Driver(object):
 class Itop(Driver):
 
     def get_ci(self, ci):
-        print "Get from itop"
+        print("Get from itop")
         return True
 
     def push_ci(self, ci):
@@ -40,8 +39,10 @@ class Itop(Driver):
                                                                )
                             )
         # Craft request body and header
-        urlbase = "http://10.3.8.40/itop/webservices/rest.php"
-        request = '{"operation":"core/update","comment":"boulalala","class":"Server","key":{"name":"Server1"},"output_fields":"id,friendlyname,ram","fields":{"ram":"28"}}'
+        urlbase = config.alexandria.conf_file.get_driver_parameters("itop", "endpoint")
+        
+              
+        request = '{"operation":"core/create","comment":"Synchronization from Alexandria","class":"Server","output_fields":"id,name,ram", "fields":{"org_id": "3","name":"' + ci.data["Name"] + '","ram":"' + format((ci.data["MemorySummary"])["TotalSystemMemoryGiB"]) + '","serialnumber":"' + ci.data["SerialNumber"] + '"}}'
         
         urlparam = {'version' : '1.0',
                     'auth_user' : username,
@@ -63,17 +64,26 @@ class Itop(Driver):
         #=======================================================================
         answer = requests.post(url,
                                auth=(username,password)
-                               )
+                              )
         
         config.logger.debug(answer.status_code)
         config.logger.debug(answer.text)
-        
 
 
 class Redfish(Driver):
 
     def get_ci(self,ci):
-        print "Get from redfish"
+        print("Get from redfish")
+        import redfish
+        
+        print(ci.ip_mgmt + " - " + ci.login + " - " + ci.password)
+        
+        remote_mgmt = redfish.connect(ci.ip_mgmt, ci.login, ci.password, verify_cert=False)
+                                       
+        ci.ci_type = remote_mgmt.Systems.systems_list[0].get_parameter("@odata.type")
+        ci.data = remote_mgmt.Systems.systems_list[0].get_parameters()
+                
+        #print("Redfish API version : {} \n".format(remote_mgmt.get_api_version()))       
         return True
 
 
@@ -110,8 +120,8 @@ class Fakeprovider(Driver):
         # Assuming the connection is ok.
 
         # Now create a copy of manager model from reference model.
-        ci.ci_type = "Manager"
-        ci.data = config.alexandria.model.get_model("Manager")
+        #ci.ci_type = "Manager"
+        #ci.data = config.alexandria.model.get_model("Manager")
 
         # Update the structure with data
         # TODO : think to encapsulate to not edit ci.data directly.
@@ -120,9 +130,9 @@ class Fakeprovider(Driver):
         #        then discard it.
 
 
-        ci.data["ManagerType"] = "BMC"
-        ci.data["Model"] = "Néné Manager"
-        ci.data["FirmwareVersion"] = "1.00"
+        #ci.data["ManagerType"] = "BMC"
+        #ci.data["Model"] = "Néné Manager"
+        #ci.data["FirmwareVersion"] = "1.00"
 
 
 
