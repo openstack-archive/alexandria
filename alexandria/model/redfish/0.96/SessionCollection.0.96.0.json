@@ -1,0 +1,55 @@
+{
+    "$schema": "http://schemas.dmtf.org/redfish/v1/redfish-schema.0.96.0",
+    "title": "SessionCollection.0.96.0",
+    "type": "object",
+    "additionalProperties": true,
+    "properties": {
+        "@odata.context": {
+            "$ref": "odata.4.0.0.json#context"
+        },
+        "@odata.id": {
+            "$ref": "odata.4.0.0.json#id"
+        },
+        "@odata.type": {
+            "$ref": "odata.4.0.0.json#type"
+        },
+        "Description": {
+            "$ref": "Resource.0.96.0.json#Description"
+        },
+        "Name": {
+            "$ref": "Resource.0.96.0.json#Name"
+        },
+        "Modified": {
+            "$ref": "Resource.0.96.0.json#Modified"
+        },
+        "Oem": {
+            "$ref": "Resource.0.96.0.json#Oem",
+            "description": "This is the manufacturer/provider specific extension moniker used to divide the Oem object into sections.",
+            "longDescription": "The value of this string shall be of the format for the reserved word *Oem*."
+        },
+        "Links": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "additionalProperties": false,
+            "properties": {
+                "Members": {
+                    "type": "array",
+                    "items": {
+                    "type": "object",
+                    "properties": {
+                        "@odata.id" :{
+                            "$ref": "odata.4.0.0.json#Id"
+                        }
+                    }
+                    },
+                    "readonly": true,
+                    "description": "Contains the members of this collection."
+                }
+            },
+            "readonly": true,
+            "description": "Contains links to other resources that are related to this resource."
+        }
+    }
+}

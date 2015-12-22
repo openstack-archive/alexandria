@@ -50,7 +50,7 @@ class Itop(Driver):
                     'json_data' : request
                     }
         
-        header = {'Content-type': 'application/json'}
+        #header = {'Content-type': 'application/json'}
         
         url = urlbase + '?' + urllib.urlencode(urlparam)
         
@@ -78,7 +78,8 @@ class Redfish(Driver):
         
         print(ci.ip_mgmt + " - " + ci.login + " - " + ci.password)
         
-        remote_mgmt = redfish.connect(ci.ip_mgmt, ci.login, ci.password, verify_cert=False)
+        #remote_mgmt = redfish.connect(ci.ip_mgmt, ci.login, ci.password, verify_cert=False)
+        remote_mgmt = redfish.connect(ci.ip_mgmt, ci.login, ci.password, simulator=True, enforceSSL=False)
                                        
         ci.ci_type = remote_mgmt.Systems.systems_list[0].get_parameter("@odata.type")
         ci.data = remote_mgmt.Systems.systems_list[0].get_parameters()
@@ -100,7 +101,7 @@ class Fakecmdb(Driver):
         # Determine ci type so we can do the proper action.
         pp = pprint.PrettyPrinter(indent=4)
         if ci.ci_type == "Manager":
-            print "We are in Fakecmdb driver !"
+            print("We are in Fakecmdb driver !")
             pp.pprint(ci.data)
             # Simply write a json file with ci.data content.
             with open("Fakecmdb.json", "w") as jsonfile:

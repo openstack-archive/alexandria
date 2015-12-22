@@ -1,0 +1,127 @@
+{
+    "$schema": "http://schemas.dmtf.org/redfish/v1/redfish-schema.0.96.0",
+    "title": "SerialInterface.0.96.0",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "@odata.context": {
+            "$ref": "odata.4.0.0.json#context"
+        },
+        "@odata.id": {
+            "$ref": "odata.4.0.0.json#id"
+        },
+        "@odata.type": {
+            "$ref": "odata.4.0.0.json#type"
+        },
+        "InterfaceEnabled": {
+            "type": [
+                "boolean",
+                "null"
+            ],
+            "description": "This indicates whether this interface is enabled.",
+            "longDescription": "The value of this property shall be a boolean indicating whether this interface is enabled."
+        },
+        "SignalType": {
+            "type": "string",
+            "enum": [
+                "Rs232",
+                "Rs485"
+            ],
+            "description": "The type of signal used for the communication connection - RS232 or RS485.",
+            "longDescription": "This property shall indicate the type of serial signalling that will be utilized for the serial connection."
+        },
+        "BitRate": {
+            "type": "string",
+            "enum": [
+                "1200",
+                "2400",
+                "4800",
+                "9600",
+                "19200",
+                "38400",
+                "57600",
+                "115200",
+                "230400"
+            ],
+            "description": "The receive and transmit rate of data flow, typically in bits-per-second (bps), over the serial connection.",
+            "longDescription": "This property shall indicate the transmit and receive speed of the serial connection."
+        },
+        "Parity": {
+            "type": "string",
+            "enum": [
+                "None",
+                "Even",
+                "Odd",
+                "Mark",
+                "Space"
+            ],
+            "description": "The type of parity used by the sender and receiver in order to detect errors over the serial connection.",
+            "longDescription": "This property shall indicate parity information for a serial connection."
+        },
+        "DataBits": {
+            "type": "string",
+            "enum": [
+                "5",
+                "6",
+                "7",
+                "8"
+            ],
+            "description": "The number of data bits that will follow the start bit over the serial connection.",
+            "longDescription": "This property shall indicate number of data bits for the serial connection."
+        },
+        "StopBits": {
+            "type": "string",
+            "enum": [
+                "1",
+                "2"
+            ],
+            "description": "The period of time before the next start bit is transmitted.",
+            "longDescription": "This property shall indicate the stop bits for the serial connection."
+        },
+        "FlowControl": {
+            "type": "string",
+            "enum": [
+                "None",
+                "Software",
+                "Hardware"
+            ],
+            "enumDescriptions": {
+                "None": "No flow control imposed",
+                "Software": "XON/XOFF in-band flow control imposed",
+                "Hardware": "Out of band flow control imposed"
+            },
+            "description": "The type of flow control, if any, that will be imposed on the serial connection.",
+            "longDescription": "This property shall indicate the flow control mechanism for the serial connection."
+        },
+        "ConnectorType": {
+            "type": "string",
+            "enum": [
+                "RJ45",
+                "RJ11",
+                "DB9 Female",
+                "DB9 Male",
+                "DB25 Female",
+                "DB25 Male",
+                "USB",
+                "mUSB",
+                "uUSB"
+            ],
+            "longDescription": "This property shall indicate the type of phyiscal connector used for this serial connection."
+        },
+        "PinOut": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "enum": [
+                "Cisco",
+                "Cyclades",
+                "Digi"
+            ],
+            "description": "The physical pin configuration needed for a serial connector.",
+            "longDescription": "This property shall indicate the physical pin out for the serial connection."
+        }
+    },
+    "description": "This schema defines an asynchronous serial interface resource.",
+    "longDescription": "This resource shall be used to represent serial resources as part of the Redfish specification."
+}

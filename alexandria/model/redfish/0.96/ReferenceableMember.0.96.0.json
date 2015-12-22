@@ -1,0 +1,36 @@
+{
+    "$schema": "http://schemas.dmtf.org/redfish/v1/redfish-schema.0.96.0",
+    "title": "ReferenceableMember.0.96.0",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "@odata.context": {
+            "$ref": "odata.4.0.0.json#context"
+        },
+        "@odata.id": {
+            "$ref": "odata.4.0.0.json#id"
+        },
+        "@odata.type": {
+            "$ref": "odata.4.0.0.json#type"
+        },
+        "Oem": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "additionalProperties": false,
+            "properties": {
+
+            },
+            "description": "This is the manufacturer/provider specific extension moniker used to divide the Oem object into sections.",
+            "longDescription": "The value of this string shall be of the format for the reserved word *Oem*."
+        },
+        "MemberId": {
+            "type": "string",
+            "description": "This is the identifier for the member within the collection.",
+            "longDescription": "The value of this string shall uniquely identify the member within the collection."
+        }
+    },
+    "description": "This is the base type for addressable members of an array.",
+    "longDescription": "Array members can be referenced using the value returned in the @odata.id property which may or may not be a dereferenceable URL."
+}

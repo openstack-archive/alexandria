@@ -1,0 +1,59 @@
+{
+    "$schema": "http://schemas.dmtf.org/redfish/v1/redfish-schema.0.96.0",
+    "title": "Role.0.96.0",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "@odata.context": {
+            "$ref": "odata.4.0.0.json#context"
+        },
+        "@odata.id": {
+            "$ref": "odata.4.0.0.json#id"
+        },
+        "@odata.type": {
+            "$ref": "odata.4.0.0.json#type"
+        },
+        "Oem": {
+            "$ref": "Resource.0.96.0.json#Oem",
+            "description": "This is the manufacturer/provider specific extension moniker used to divide the Oem object into sections.",
+            "longDescription": "The value of this string shall be of the format for the reserved word *Oem*."
+        },
+        "Id": {
+            "$ref": "Resource.0.96.0.json#Id"
+        },
+        "Description": {
+            "$ref": "Resource.0.96.0.json#Description"
+        },
+        "Name": {
+            "$ref": "Resource.0.96.0.json#Name"
+        },
+        "IsPredefined": {
+            "type": "boolean",
+            "description": "This property is used to indicate if the Role is one of the Redfish Predefined Roles vs a Custom role.",
+            "longDescription": "The value of this property shall indicate if the role is a predefined role. ."
+        },
+        "AssignedPrivileges": {
+            "type": "array",
+            "items": {
+                "ERROR": "type Privileges.PrivilegeType unrecognized."
+            },
+            "readonly": true,
+            "description": "The redfish privileges that this role includes.",
+            "longDescription": "The value of this property shall be the redfish privileges that the role includes."
+        },
+        "OEMPrivileges": {
+            "type": "array",
+            "items": {
+                "type": [
+                    "string",
+                    "null"
+                ]
+            },
+            "readonly": true,
+            "description": "The OEM privileges that this role includes.",
+            "longDescription": "The value of this property shall be the OEM privileges that this role includes."
+        }
+    },
+    "description": "This schema defines a user role to be used in conjunction with a manager account.",
+    "longDescription": "This resource shall be used to represent resources that represent the user role for the user account."
+}

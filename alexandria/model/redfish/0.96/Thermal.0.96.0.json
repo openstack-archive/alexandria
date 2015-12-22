@@ -1,0 +1,440 @@
+{
+    "$schema": "http://schemas.dmtf.org/redfish/v1/redfish-schema.0.96.0",
+    "title": "Thermal.0.96.0",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "@odata.context": {
+            "$ref": "odata.4.0.0.json#context"
+        },
+        "@odata.id": {
+            "$ref": "odata.4.0.0.json#id"
+        },
+        "@odata.type": {
+            "$ref": "odata.4.0.0.json#type"
+        },
+        "Oem": {
+            "$ref": "Resource.0.96.0.json#Oem",
+            "description": "This is the manufacturer/provider specific extension moniker used to divide the Oem object into sections.",
+            "longDescription": "The value of this string shall be of the format for the reserved word *Oem*."
+        },
+        "Id": {
+            "$ref": "Resource.0.96.0.json#Id"
+        },
+        "Description": {
+            "$ref": "Resource.0.96.0.json#Description"
+        },
+        "Name": {
+            "$ref": "Resource.0.96.0.json#Name"
+        },
+        "Status": {
+            "$ref": "Resource.0.96.0.json#Status"
+        },
+        "Temperatures": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Temperature"
+            },
+            "readonly": true,
+            "description": "This is the definition for temperature sensors.",
+            "longDescription": "These properties shall be the definition for temperature sensors for a Redfish implementation."
+        },
+        "Fans": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Fan"
+            },
+            "readonly": true,
+            "description": "This is the definition for fans.",
+            "longDescription": "These properties shall be the definition for fans for a Redfish implementation."
+        },
+        "Redundancy": {
+            "type": "array",
+            "items": {
+                "$ref": "Redundancy.0.96.0.json#Redundancy"
+            },
+            "readonly": true,
+            "description": "This structure is used to show redundancy for fans.  The Component ids will reference the members of the redundancy groups.",
+            "longDescription": "The values of the properties in this array shall be used to show redundancy for fans and other elements in this resource.  The use of IDs within these arrays shall reference the members of the redundancy groups."
+        }
+    },
+    "description": "This is the schema definition for the Thermal properties.  It represents the properties for Temperature and Cooling.",
+    "longDescription": "This resource shall be used to represent a thermal metrics resource for a Redfish implementation.",
+    "#definitions": {
+        "Temperature":{
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "@odata.context": {
+                    "$ref": "odata.4.0.0.json#context"
+                },
+                "@odata.id": {
+                    "$ref": "odata.4.0.0.json#id"
+                },
+                "@odata.type": {
+                    "$ref": "odata.4.0.0.json#type"
+                },
+                "Oem": {
+                    "$ref": "Resource.0.96.0.json#Oem",
+                    "description": "This is the manufacturer/provider specific extension moniker used to divide the Oem object into sections.",
+                    "longDescription": "The value of this string shall be of the format for the reserved word *Oem*."
+                },
+                "MemberId": {
+                    "type": "string",
+                    "description": "This is the identifier for the member within the collection.",
+                    "longDescription": "The value of this string shall uniquely identify the member within the collection."
+                },
+                "Name": {
+                    "$ref": "Resource.0.96.0.json#Name"
+                },
+                "SensorNumber": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "readonly": true,
+                    "description": "A numerical identifier to represent the temperature sensor",
+                    "longDescription": "The value of this property shall be a numerical identifier for this temperature sensor that is unique within this resource. "
+                },
+                "Status": {
+                    "$ref": "Resource.0.96.0.json#Status"
+                },
+                "ReadingCelsius": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "readonly": true,
+                    "description": "Temperature",
+                    "longDescription": "The value of this property shall be the current value of the temperature sensor's reading."
+                },
+                "UpperThresholdNonCritical": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "readonly": true,
+                    "description": "Above normal range",
+                    "longDescription": "The value of this property shall indicate the ReadingCelsius is above the normal range but is not critical. The units shall be the same units as the related ReadingCelsius propoerty."
+                },
+                "UpperThresholdCritical": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "readonly": true,
+                    "description": "Above normal range but not yet fatal.",
+                    "longDescription": "The value of this property shall indicate the ReadingCelsius is above the normal range but is not yet fatal. The units shall be the same units as the related ReadingCelsius propoerty."
+                },
+                "UpperThresholdFatal": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "readonly": true,
+                    "description": "Above normal range and is fatal",
+                    "longDescription": "The value of this property shall indicate the ReadingCelsius is above the normal range and is fatal. The units shall be the same units as the related ReadingCelsius propoerty."
+                },
+                "LowerThresholdNonCritical": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "readonly": true,
+                    "description": "Below normal range",
+                    "longDescription": "The value of this property shall indicate the ReadingCelsius is below the normal range but is not critical. The units shall be the same units as the related ReadingCelsius propoerty."
+                },
+                "LowerThresholdCritical": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "readonly": true,
+                    "description": "Below normal range but not yet fatal.",
+                    "longDescription": "The value of this property shall indicate the ReadingCelsius is below the normal range but is not yet fatal. The units shall be the same units as the related ReadingCelsius propoerty."
+                },
+                "LowerThresholdFatal": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "readonly": true,
+                    "description": "Below normal range and is fatal",
+                    "longDescription": "The value of this property shall indicate the ReadingCelsius is below the normal range and is fatal. The units shall be the same units as the related ReadingCelsius propoerty."
+                },
+                "MinReadingRangeTemp": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "readonly": true,
+                    "description": "Minimum value for ReadingCelsius",
+                    "longDescription": "The value of this property shall indicate the lowest possible value for ReadingCelsius. The units shall be the same units as the related ReadingCelsius propoerty."
+                },
+                "MaxReadingRangeTemp": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "readonly": true,
+                    "description": "Maximum value for ReadingCelsius",
+                    "longDescription": "The value of this property shall indicate the lowest possible value for ReadingCelsius. The units shall be the same units as the related ReadingCelsius propoerty."
+                },
+                "PhysicalContext": {
+                    "type": "string",
+                    "enum": [
+                        "Room",
+                        "Intake",
+                        "Exhaust",
+                        "Front",
+                        "Back",
+                        "Upper",
+                        "Lower",
+                        "CPU",
+                        "GPU",
+                        "Backplane",
+                        "SystemBoard",
+                        "PowerSupply",
+                        "VoltageRegulator",
+                        "StorageDevice",
+                        "NetworkingDevice",
+                        "ComputeBay",
+                        "StorageBay",
+                        "NetworkBay",
+                        "ExpansionBay",
+                        "PowerSupplyBay"
+                    ],
+                    "enumDescriptions": {
+                        "Room": "The room",
+                        "Intake": "The intake point of the chassis",
+                        "Exhaust": "The exhaust point of the chassis",
+                        "Front": "The front of the chassis",
+                        "Back": "The back of the chassis",
+                        "Upper": "The upper portion of the chassis",
+                        "Lower": "The lower portion of the chassis",
+                        "CPU": "A Processor (CPU)",
+                        "GPU": "A Graphics Processor (GPU)",
+                        "Backplane": "A backplane within the chassis",
+                        "SystemBoard": "The system board (PCB)",
+                        "PowerSupply": "A power supply",
+                        "VoltageRegulator": "A voltage regulator device",
+                        "StorageDevice": "A storage device",
+                        "NetworkingDevice": "A networking device",
+                        "ComputeBay": "Within a compute bay",
+                        "StorageBay": "Within a storage bay",
+                        "NetworkBay": "Within a networking bay",
+                        "ExpansionBay": "Within an expansion bay",
+                        "PowerSupplyBay": "Within a power supply bay"
+                    },
+                    "readonly": true,
+                    "description": "Describes the area or device to which this temperature measurement applies.",
+                    "longDescription": "The value of this property shall be a description of the affected device or region within the chassis to which this temperature measurement applies."
+                },
+                "RelatedItem": {
+                    "type": "array",
+                    "items": {
+                    "type": "object",
+                    "properties": {
+                        "@odata.id" :{
+                            "$ref": "odata.4.0.0.json#Id"
+                        }
+                    }
+                    },
+                    "readonly": true,
+                    "description": "Describes the areas or devices to which this temperature measurement applies.",
+                    "longDescription": "The value of this property shall the array of IDs of areas or devices to which this temperature measurement applies."
+                }
+            }
+        },
+        "Fan":{
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "@odata.context": {
+                    "$ref": "odata.4.0.0.json#context"
+                },
+                "@odata.id": {
+                    "$ref": "odata.4.0.0.json#id"
+                },
+                "@odata.type": {
+                    "$ref": "odata.4.0.0.json#type"
+                },
+                "Oem": {
+                    "$ref": "Resource.0.96.0.json#Oem",
+                    "description": "This is the manufacturer/provider specific extension moniker used to divide the Oem object into sections.",
+                    "longDescription": "The value of this string shall be of the format for the reserved word *Oem*."
+                },
+                "MemberId": {
+                    "type": "string",
+                    "description": "This is the identifier for the member within the collection.",
+                    "longDescription": "The value of this string shall uniquely identify the member within the collection."
+                },
+                "FanName": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "readonly": true,
+                    "description": "Name of the fan",
+                    "longDescription": "The value of this property shall be the name of the fan."
+                },
+                "PhysicalContext": {
+                    "type": "string",
+                    "enum": [
+                        "Room",
+                        "Intake",
+                        "Exhaust",
+                        "Front",
+                        "Back",
+                        "Upper",
+                        "Lower",
+                        "CPU",
+                        "GPU",
+                        "Backplane",
+                        "SystemBoard",
+                        "PowerSupply",
+                        "VoltageRegulator",
+                        "StorageDevice",
+                        "NetworkingDevice",
+                        "ComputeBay",
+                        "StorageBay",
+                        "NetworkBay",
+                        "ExpansionBay",
+                        "PowerSupplyBay"
+                    ],
+                    "enumDescriptions": {
+                        "Room": "The room",
+                        "Intake": "The intake point of the chassis",
+                        "Exhaust": "The exhaust point of the chassis",
+                        "Front": "The front of the chassis",
+                        "Back": "The back of the chassis",
+                        "Upper": "The upper portion of the chassis",
+                        "Lower": "The lower portion of the chassis",
+                        "CPU": "A Processor (CPU)",
+                        "GPU": "A Graphics Processor (GPU)",
+                        "Backplane": "A backplane within the chassis",
+                        "SystemBoard": "The system board (PCB)",
+                        "PowerSupply": "A power supply",
+                        "VoltageRegulator": "A voltage regulator device",
+                        "StorageDevice": "A storage device",
+                        "NetworkingDevice": "A networking device",
+                        "ComputeBay": "Within a compute bay",
+                        "StorageBay": "Within a storage bay",
+                        "NetworkBay": "Within a networking bay",
+                        "ExpansionBay": "Within an expansion bay",
+                        "PowerSupplyBay": "Within a power supply bay"
+                    },
+                    "readonly": true,
+                    "description": "Describes the area or device associated with this fan.",
+                    "longDescription": "The value of this property shall be a description of the affected device or region within the chassis to which this fan is associated."
+                },
+                "Status": {
+                    "$ref": "Resource.0.96.0.json#Status"
+                },
+                "ReadingRPM": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "readonly": true,
+                    "description": "Current fan speed in RPM",
+                    "longDescription": "The value of this property shall be the current value of the fan sensor's reading."
+                },
+                "UpperThresholdNonCritical": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "readonly": true,
+                    "description": "Above normal range",
+                    "longDescription": "The value of this property shall indicate the ReadingRPM is above the normal range but is not critical. The units shall be the same units as the related ReadingRPM propoerty."
+                },
+                "UpperThresholdCritical": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "readonly": true,
+                    "description": "Above normal range but not yet fatal",
+                    "longDescription": "The value of this property shall indicate the ReadingRPM is above the normal range but is not yet fatal. The units shall be the same units as the related ReadingRPM propoerty."
+                },
+                "UpperThresholdFatal": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "readonly": true,
+                    "description": "Above normal range and is fatal",
+                    "longDescription": "The value of this property shall indicate the ReadingRPM is above the normal range and is fatal. The units shall be the same units as the related ReadingRPM propoerty."
+                },
+                "LowerThresholdNonCritical": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "readonly": true,
+                    "description": "Below normal range",
+                    "longDescription": "The value of this property shall indicate the ReadingRPM is below the normal range but is not critical. The units shall be the same units as the related ReadingRPM propoerty."
+                },
+                "LowerThresholdCritical": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "readonly": true,
+                    "description": "Below normal range but not yet fatal",
+                    "longDescription": "The value of this property shall indicate the ReadingRPM is below the normal range but is not yet fatal. The units shall be the same units as the related ReadingRPM propoerty."
+                },
+                "LowerThresholdFatal": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "readonly": true,
+                    "description": "Below normal range and is fatal",
+                    "longDescription": "The value of this property shall indicate the ReadingRPM is below the normal range and is fatal. The units shall be the same units as the related ReadingRPM propoerty."
+                },
+                "MinReadingRange": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "readonly": true,
+                    "description": "Minimum value for ReadingRPM",
+                    "longDescription": "The value of this property shall indicate the lowest possible value for ReadingRPM. The units shall be the same units as the related ReadingRPM propoerty."
+                },
+                "MaxReadingRange": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "readonly": true,
+                    "description": "Maximum value for ReadingRPM",
+                    "longDescription": "The value of this property shall indicate the lowest possible value for ReadingRPM. The units shall be the same units as the related ReadingRPM propoerty."
+                },
+                "RelatedItem": {
+                    "type": "array",
+                    "items": {
+                    "type": "object",
+                    "properties": {
+                        "@odata.id" :{
+                            "$ref": "odata.4.0.0.json#Id"
+                        }
+                    }
+                    },
+                    "description": "The ID(s) of the resources serviced with this fan",
+                    "longDescription": "The value of this property shall be an array of IDs containing pointers to the resource that are being serviced by this fan."
+                },
+                "Redundancy": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Redundancy.0.96.0.json#Redundancy"
+                    },
+                    "readonly": true,
+                    "description": "This structure is used to show redundancy for fans.  The Component ids will reference the members of the redundancy groups.",
+                    "longDescription": "The values of the properties in this array shall be used to show redundancy for fans and other elements in this resource.  The use of IDs within these arrays shall reference the members of the redundancy groups."
+                }
+            }
+        }
+    }
+}
