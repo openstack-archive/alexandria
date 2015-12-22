@@ -1,0 +1,298 @@
+{
+    "$schema": "http://schemas.dmtf.org/redfish/v1/redfish-schema.0.96.0",
+    "title": "ManagerNetworkProtocol.0.96.0",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "@odata.context": {
+            "$ref": "odata.4.0.0.json#context"
+        },
+        "@odata.id": {
+            "$ref": "odata.4.0.0.json#id"
+        },
+        "@odata.type": {
+            "$ref": "odata.4.0.0.json#type"
+        },
+        "Links": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Oem": {
+                    "$ref": "Resource.0.96.0.json#Oem",
+                    "description": "Oem extension object.",
+                    "longDescription": "This object represents the Oem property.  All values for resources described by this schema shall comply to the requirements as described in the Redfish specification."
+                },
+                "Settings": {
+                    "type": "object",
+                    "properties": {
+                        "@odata.id" :{
+                            "$ref": "odata.4.0.0.json#Id"
+                        }
+                    },
+                    "readonly": true,
+                    "description": "This is a reference to the settings for this manager if this resource has a separate object used to change the current settings of this manager.",
+                    "longDescription": "If this resource is not PATCHable, this is the link to PATCHable Settings for the resource.  This reference shall be to a resource of Type ManagerNetworkProtocol."
+                }
+            },
+            "readonly": true,
+            "description": "This object contains the links to other resources that are related to this resource."
+        },
+        "HostName": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "readonly": true,
+            "description": "The DNS Host Name of this manager, without any domain information",
+            "longDescription": "The value of this property shall contain the host name without any domain information."
+        },
+        "FQDN": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "readonly": true,
+            "description": "This is the fully qualified domain name for the manager obtained by DNS including the host name and top-level domain name.",
+            "longDescription": "The value of this property shall contain the fully qualified domain name for the manager."
+        },
+        "HTTP": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Enabled": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ],
+                    "description": "Indicates if the protocol is enabled or disabled",
+                    "longDescription": "The value of this property shall contain the enabled status of the protocol.  The value shall be true if enabled and false if disabled."
+                },
+                "Port": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "description": "Indicates the protocol port.",
+                    "longDescription": "The value of this property shall contain the port assigned for the protocol."
+                }
+            },
+            "readonly": true,
+            "description": "This object is used for the HTTP protocol settings for the manager. The default value of the Port property shall be 80 for compatibility with established client implementations."
+        },
+        "HTTPS": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Enabled": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ],
+                    "description": "Indicates if the protocol is enabled or disabled",
+                    "longDescription": "The value of this property shall contain the enabled status of the protocol.  The value shall be true if enabled and false if disabled."
+                },
+                "Port": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "description": "Indicates the protocol port.",
+                    "longDescription": "The value of this property shall contain the port assigned for the protocol."
+                }
+            },
+            "readonly": true,
+            "description": "This object is used for the HTTPS/SSL settings for the manager. The default value of the Port property shall be 443 for compatibility with established client implementations."
+        },
+        "SNMP": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Enabled": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ],
+                    "description": "Indicates if the protocol is enabled or disabled",
+                    "longDescription": "The value of this property shall contain the enabled status of the protocol.  The value shall be true if enabled and false if disabled."
+                },
+                "Port": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "description": "Indicates the protocol port.",
+                    "longDescription": "The value of this property shall contain the port assigned for the protocol."
+                }
+            },
+            "readonly": true,
+            "description": "This object is used for the SNMP protocol settings for the manager. The default value of the Port property shall be 161 for compatibility with established client implementations."
+        },
+        "VirtualMedia": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Enabled": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ],
+                    "description": "Indicates if the protocol is enabled or disabled",
+                    "longDescription": "The value of this property shall contain the enabled status of the protocol.  The value shall be true if enabled and false if disabled."
+                },
+                "Port": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "description": "Indicates the protocol port.",
+                    "longDescription": "The value of this property shall contain the port assigned for the protocol."
+                }
+            },
+            "readonly": true,
+            "description": "This object is used for the Virtual Media protocol settings for the manager. The value of the Port property shall contain the TCP port assigned for Virtual Media usage."
+        },
+        "Telnet": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Enabled": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ],
+                    "description": "Indicates if the protocol is enabled or disabled",
+                    "longDescription": "The value of this property shall contain the enabled status of the protocol.  The value shall be true if enabled and false if disabled."
+                },
+                "Port": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "description": "Indicates the protocol port.",
+                    "longDescription": "The value of this property shall contain the port assigned for the protocol."
+                }
+            },
+            "readonly": true,
+            "description": "This object is used for the Telnet protocol settings for the manager. The default value of the Port property shall be 23 for compatibility with established client implementations."
+        },
+        "SSDP": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "NotifyMulticastIntervalSeconds": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "description": "Indicates how often the Multicast is done from this service for SSDP.",
+                    "longDescription": "The value of this property shall contain the time interval, in seconds, between transmissions of the multicast NOTIFY ALIVE message.  A setting of 0 seconds shall disable this functionality.  The recommended value is 600 seconds."
+                },
+                "NotifyTTL": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "description": "Indicates the time to live hop count for SSDPs Notify messages.",
+                    "longDescription": "The value of this property shall contain the Time-To-Live hop count used for multicast NOTIFY messages.  The recommended value is 5."
+                },
+                "NotifyIPv6Scope": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "enum": [
+                        "Link",
+                        "Site",
+                        "Organization"
+                    ],
+                    "enumDescriptions": {
+                        "Link": "SSDP Notify messages are sent to addresses in the IPv6 Local Link scope",
+                        "Site": "SSDP Notify messages are sent to addresses in the IPv6 Local Site scope",
+                        "Organization": "SSDP Notify messages are sent to addresses in the IPv6 Local Organization scope"
+                    },
+                    "description": "Indicates the scope for the IPv6 Notify messages for SSDP.",
+                    "longDescription": "The value of this property shall contain the IPv6 scope used for multicast NOTIFY messages.  The valid enumerations are a subset of the available IPv6 Scope types."
+                }
+            },
+            "readonly": true,
+            "description": "This object is used for the SSDP protocol settings for the manager.  Simple Service Discovery Protocol (SSDP) is for network discovery of devices supporting the Redfish service. The default value of the Port property shall be 1900 for compatibility with established client implementations."
+        },
+        "IPMI": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Enabled": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ],
+                    "description": "Indicates if the protocol is enabled or disabled",
+                    "longDescription": "The value of this property shall contain the enabled status of the protocol.  The value shall be true if enabled and false if disabled."
+                },
+                "Port": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "description": "Indicates the protocol port.",
+                    "longDescription": "The value of this property shall contain the port assigned for the protocol."
+                }
+            },
+            "readonly": true,
+            "description": "This object is used for the IPMI over LAN protocol settings for the manager. The default value of the Port property shall be 623 for compatibility with established client implementations."
+        },
+        "SSH": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Enabled": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ],
+                    "description": "Indicates if the protocol is enabled or disabled",
+                    "longDescription": "The value of this property shall contain the enabled status of the protocol.  The value shall be true if enabled and false if disabled."
+                },
+                "Port": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "description": "Indicates the protocol port.",
+                    "longDescription": "The value of this property shall contain the port assigned for the protocol."
+                }
+            },
+            "readonly": true,
+            "description": "This object is used for the SSH protocol settings for the manager. The default value of the Port property shall be 22 for compatibility with established client implementations."
+        },
+        "KVMIP": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Enabled": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ],
+                    "description": "Indicates if the protocol is enabled or disabled",
+                    "longDescription": "The value of this property shall contain the enabled status of the protocol.  The value shall be true if enabled and false if disabled."
+                },
+                "Port": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "description": "Indicates the protocol port.",
+                    "longDescription": "The value of this property shall contain the port assigned for the protocol."
+                }
+            },
+            "readonly": true,
+            "description": "This object is used for the KVM-IP (Keyboard, Video, Mouse) protocol settings for the manager. The value of the Port property shall contain the TCP port assigned for SSH usage.  The default value shall be 22 for compatibility with established client implementations."
+        },
+        "Status": {
+            "$ref": "Resource.0.96.0.json#Status"
+        }
+    },
+    "description": "This resource is used to obtain or modify the network services managed by a given manager.",
+    "longDescription": "This object shall be used to represent the network service settings for the manager."
+}

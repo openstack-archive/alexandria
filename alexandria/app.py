@@ -154,10 +154,10 @@ if __name__ == "__main__":
     config.alexandria.model.logger = app.logger
     
     # TODO : Debugging stuff to remove later.
-    print config.alexandria.model.reference_items
-    print config.alexandria.drivers.itop.get_ci(None)
-    print config.alexandria.drivers.redfish.get_ci(None)
-    print config.alexandria.drivers.itop.driver_type
+    #print config.alexandria.model.reference_items
+    #print config.alexandria.drivers.itop.get_ci(None)
+    #print config.alexandria.drivers.redfish.get_ci(None)
+    #print config.alexandria.drivers.itop.driver_type
     #pp.pprint(models.EthernetInterface)  # debugging example.
     #pp.pprint(models.Manager)  # debugging example.
     app.logger.info("Starting %s...", config.alexandria.NAME)

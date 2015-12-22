@@ -1,0 +1,113 @@
+{
+    "$schema": "http://schemas.dmtf.org/redfish/v1/redfish-schema.0.96.0",
+    "title": "ListenerDestination.0.96.0",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "@odata.context": {
+            "$ref": "odata.4.0.0.json#context"
+        },
+        "@odata.id": {
+            "$ref": "odata.4.0.0.json#id"
+        },
+        "@odata.type": {
+            "$ref": "odata.4.0.0.json#type"
+        },
+        "Oem": {
+            "$ref": "Resource.0.96.0.json#Oem",
+            "description": "This is the manufacturer/provider specific extension moniker used to divide the Oem object into sections.",
+            "longDescription": "The value of this string shall be of the format for the reserved word *Oem*."
+        },
+        "Id": {
+            "$ref": "Resource.0.96.0.json#Id"
+        },
+        "Description": {
+            "$ref": "Resource.0.96.0.json#Description"
+        },
+        "Name": {
+            "$ref": "Resource.0.96.0.json#Name"
+        },
+        "Destination": {
+            "type": "string",
+            "readonly": true,
+            "description": "The URI of the destination listener service.",
+            "longDescription": "This property shall contain a URI to the destination where the events will be sent."
+        },
+        "HttpHeaders": {
+            "type": "array",
+            "items": {
+                "type": [
+                    "object",
+                    "null"
+                ],
+                "additionalProperties": false,
+                "properties": {
+
+                },
+                "dynamicPropertyPattern":{ 
+                    "pattern":"^[^:\\s]+$",
+                    "type":"string"
+                },
+                "description": "The value of the HTTP header is the property value.  The header name is the property name."
+            },
+            "description": "This is for setting HTTP headers, such as authorization information.  This object will be null on a GET.",
+            "longDescription": "This property shall contain an object consisting of the names and values of of HTTP header to be included with every event POST to the Listener Destination.  This property shall be null on a GET."
+        },
+        "EventTypes": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "enum": [
+                    "StatusChange",
+                    "ResourceUpdated",
+                    "ResourceAdded",
+                    "ResourceRemoved",
+                    "Alert"
+                ],
+                "enumDescriptions": {
+                    "StatusChange": "The status of this resource has changed",
+                    "ResourceUpdated": "The value of this resource has been updated",
+                    "ResourceAdded": "A resource has been added",
+                    "ResourceRemoved": "A resource has been removed",
+                    "Alert": "A condition exists which requires attention"
+                }
+            },
+            "readonly": true,
+            "description": "This property shall contain the types of events that shall be sent to the desination."
+        },
+        "TTLCount": {
+            "type": "integer",
+            "description": "The number of TTLUnits until this listener destination subscription expires.  It may be renewed prior to expire to reset the Time to Live counter.  The value 999999 is reserved to mean a perpetual subscription.",
+            "longDescription": "This property shall contain the Time To Live Count.  A value of 999999 shall indicate that this is a persistent connection."
+        },
+        "TTLUnits": {
+            "type": "string",
+            "enum": [
+                "seconds",
+                "minutes",
+                "days"
+            ],
+            "enumDescriptions": {
+                "seconds": "Time to Live (TTL) in Seconds",
+                "minutes": "Time to Live (TTL) in Minutes",
+                "days": "Time to Live (TTL) in Days"
+            },
+            "description": "The time unit used to measure the subscription time of this listener destination.  This is the units for TTLCount and is used to express the subscription lifetime of the listener destination.",
+            "longDescription": "This property shall contain the units of the expressed TTLCount."
+        },
+        "Context": {
+            "type": "string",
+            "description": "A client-supplied string that is stored with the listener destination subscription.",
+            "longDescription": "This property shall contain a client supplied context that will remain with the connection through the connections lifetime."
+        },
+        "Protocol": {
+            "type": "string",
+            "enum": [
+                "Redfish"
+            ],
+            "readonly": true,
+            "description": "The protocol type of the listener connection.",
+            "longDescription": "This property shall contain the protocol type that the event will use for sending the event to the destination.  A value of Redfish shall be used to indicate that the event type shall adhere to that defined in the Redfish specification."
+        }
+    }
+}
