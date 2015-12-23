@@ -20,7 +20,7 @@ class Driver(object):
     def get_ci(self, ci):
         pass
 
-    def push_ci(self, ci):
+    def set_ci(self, ci):
         pass
 
 
@@ -30,7 +30,7 @@ class Itop(Driver):
         print("Get from itop")
         return True
 
-    def push_ci(self, ci):
+    def set_ci(self, ci):
         username = config.alexandria.conf_file.get_driver_parameters("itop", "loginItop")
         password = config.alexandria.conf_file.get_driver_parameters("itop", "passwordItop")
         config.logger.debug("login : {}, password : {}".format(
@@ -87,6 +87,9 @@ class Redfish(Driver):
         #print("Redfish API version : {} \n".format(remote_mgmt.get_api_version()))       
         return True
 
+    def set_ci(self, ci):
+        print "Push to Redfish"
+        return True
 
 class Ironic(Driver):
     pass
@@ -97,7 +100,7 @@ class Mondorescue(Driver):
 
 
 class Fakecmdb(Driver):
-    def push_ci(self, ci):
+    def set_ci(self, ci):
         # Determine ci type so we can do the proper action.
         pp = pprint.PrettyPrinter(indent=4)
         if ci.ci_type == "Manager":

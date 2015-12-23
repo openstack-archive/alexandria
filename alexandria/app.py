@@ -94,7 +94,7 @@ def synchronize_ci(ci):
     # Push the data provided above to all our drivers
     for driver in config.alexandria.drivers:
         app.logger.info("Push information to {} driver.".format(driver.get_driver_type()))
-        driver.push_ci(ci)
+        driver.set_ci(ci)
     
 
 @app.route('/ci', methods=['PUT'])
@@ -162,4 +162,3 @@ if __name__ == "__main__":
     #pp.pprint(models.Manager)  # debugging example.
     app.logger.info("Starting %s...", config.alexandria.NAME)
     app.run(port=int(config.alexandria.conf_file.get_alexandria_port()))
-    
