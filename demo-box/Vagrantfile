@@ -1,0 +1,44 @@
+Vagrant.configure(2) do |config|
+
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+  config.vm.guest = :ubuntu
+  
+  config.ssh.username = "alexandria"
+  config.ssh.username = "alexandria"
+
+  #############################################################################
+  # Alexandria
+  #############################################################################
+  
+  config.vm.define "Alexandria" do |alexandria|
+    node alexandria, name: "Alexandria"
+
+	# Alexandria init
+    alexandria.vm.provision "shell", path: "alexandria_init.sh", keep_color: true, privileged: false
+							
+    # Port forward for install GUI
+    alexandria.vm.network "forwarded_port", guest: 22, host: 22, auto_correct: true
+
+    # Port forward for http
+    alexandria.vm.network "forwarded_port", guest: 80, host: 80, auto_correct: true
+
+    # Port forward for https
+    alexandria.vm.network "forwarded_port", guest: 443, host: 443, auto_correct: true
+
+  end
+
+###############################################################################
+# Helper functions
+###############################################################################
+
+  def node (server, name: None, memory: 512, cpus: 2)
+
+    server.vm.box = "ubuntu/trusty64"
+
+    # Hardware
+    server.vm.provider "virtualbox" do |vb, override|
+      vb.memory = memory
+      vb.cpus = cpus
+    end
+  end
+end
