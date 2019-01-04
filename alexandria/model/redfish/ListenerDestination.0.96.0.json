@@ -51,7 +51,7 @@
                 "description": "The value of the HTTP header is the property value.  The header name is the property name."
             },
             "description": "This is for setting HTTP headers, such as authorization information.  This object will be null on a GET.",
-            "longDescription": "This property shall contain an object consisting of the names and values of of HTTP header to be included with every event POST to the Listener Destination.  This property shall be null on a GET."
+            "longDescription": "This property shall contain an object consisting of the names and values of HTTP header to be included with every event POST to the Listener Destination.  This property shall be null on a GET."
         },
         "EventTypes": {
             "type": "array",
